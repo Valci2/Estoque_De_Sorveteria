@@ -85,11 +85,6 @@ void Estoque::adicionar_produtos(const std::vector<std::string> &produtos) {
     std::cout << "Qual a data de validade. Ex(12/09/25): ";
     std::cin >> data_de_validade;
 
-    // validade apos aberto
-    std::cout << "validade apos aberto: ";
-    std::cin >> validade_apos_aberto;
-    limpar_entrada();
-
     // preco
     std::cout << "preco: ";
     std::cin >> preco;
@@ -101,11 +96,19 @@ void Estoque::adicionar_produtos(const std::vector<std::string> &produtos) {
     // adiciona ao estoque
     produtos_em_estoque.push_back(produto_criado);
 }
-
 void Estoque::listar_produtos() {
+    // prints iniciais
     std::cout << "====== Produtos em estoque =====" << std::endl;
-    std::cout << "id  |nome"  << std::endl;
+    std::cout << " " << std::endl;
+
     for (int i = 0; i < produtos_em_estoque.size(); i++) {
-        std::cout << produtos_em_estoque[i].get_id() << "  |" << produtos_em_estoque[i].get_nome() << std::endl;
+        std::cout<< "---------------------" << std::endl;
+        std::cout<< "id         |" << produtos_em_estoque[i].get_id() << std::endl;
+        std::cout<< "nome       |" << produtos_em_estoque[i].get_nome() << std::endl;
+        std::cout<< "marca      |" << produtos_em_estoque[i].get_marca() << std::endl;
+        std::cout<< "sabor      |" << produtos_em_estoque[i].get_sabor() << std::endl;
+        std::cout<< "validade   |" << produtos_em_estoque[i].get_data_de_validade() << std::endl;
+        std::cout<< "preco      |" << produtos_em_estoque[i].get_preco() << std::endl;
+        std::cout<< "---------------------" << std::endl;
     }
 }
