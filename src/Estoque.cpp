@@ -17,10 +17,8 @@ void limpar_entrada() {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-// ======= inicia o programa =======
 void Estoque::iniciar() {
     int escolha = 0;
-
     do {
         // menu das escolhas disponiveis
         std::cout << "====== Estoque ======" << std::endl;
@@ -29,11 +27,11 @@ void Estoque::iniciar() {
         std::cout << "[3] Atualizar Produtos" << std::endl;
         std::cout << "[4] Apagar Produtos" << std::endl;
         std::cout << "[5] Sair do programa" << std::endl;
-        std::cout << "escolha: ";
         std::cin >> escolha;
         if (std::cin.fail()) {
             limpar_entrada();
         }
+        std::string produto;
 
         // escolhas disponiveis
         switch (escolha) {
@@ -43,30 +41,24 @@ void Estoque::iniciar() {
                 break;
             case 2:
                 listar_produtos();
-                break;
-            case 3:
-                atualizar_produto();
-            case 4:
-                remover_produto();
         }
     } while (escolha != 5);
 }
 
-// Mostra todo o menu com cada um dos itens que nos adicionarmos no vector de produtos
 void Estoque::menu_dos_produtos(const std::vector<std::string> &produtos) {
-    std::cout << "======== Produtos ========" << std::endl;
+    std::cout << "===== Produtos =====" << std::endl;
     for (int i = 0; i < produtos.size(); i++) {
         std::cout << "[" << i + 1 << "] " << produtos[i] << std::endl;
     }
 }
 
-// parte que adiciona o produto no estoque
 void Estoque::adicionar_produtos(const std::vector<std::string> &produtos) {
     int id = produtos_em_estoque.size() + 1;
     std::string nome;
     std::string marca;
     std::string sabor;
     std::string data_de_validade;
+    int validade_apos_aberto = 0;
     double preco = 0;
 
     int escolha_do_produto = 0;
@@ -93,28 +85,26 @@ void Estoque::adicionar_produtos(const std::vector<std::string> &produtos) {
     std::cout << "Qual a data de validade. Ex(12/09/25): ";
     std::cin >> data_de_validade;
 
+    // validade apos aberto
+    std::cout << "validade apos aberto: ";
+    std::cin >> validade_apos_aberto;
+    limpar_entrada();
 
-    while (true) {
-        // preco
-        std::cout << "preco: ";
-        std::cin >> preco;
-        if (!std::cin.fail()) {
-            break;
-        }
-        limpar_entrada();
-    }
+    // preco
+    std::cout << "preco: ";
+    std::cin >> preco;
+    limpar_entrada();
 
     // cria o produto
-    Produto produto_criado(id, nome, marca, sabor, data_de_validade, preco);
+    Produto produto_criado(id, nome, marca, sabor, data_de_validade, validade_apos_aberto, preco);
 
     // adiciona ao estoque
     produtos_em_estoque.push_back(produto_criado);
 }
 
-// ======== função que lista os produtos ========
 void Estoque::listar_produtos() {
     std::cout << "====== Produtos em estoque =====" << std::endl;
-    std::cout << "id  |nome" << std::endl;
+    std::cout << "id  |nome"  << std::endl;
     for (int i = 0; i < produtos_em_estoque.size(); i++) {
         std::cout << produtos_em_estoque[i].get_id() << "  |" << produtos_em_estoque[i].get_nome() << std::endl;
     }
