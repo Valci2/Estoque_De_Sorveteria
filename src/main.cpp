@@ -1,8 +1,7 @@
-#include <iostream>
-#include "Loja.h"
+#include "Estoque.h"
 
 int main(){
-    Loja loja;
+    Estoque loja;
     loja.iniciar();
     return 0;    
 }
