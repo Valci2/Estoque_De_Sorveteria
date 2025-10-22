@@ -3,20 +3,27 @@
 #include <vector>
 
 class Estoque {
-    private:
-        std::vector<Produto> produtos_em_estoque; // vector para manter todos os produtos dentro do estoque
-    public:
-        Estoque() = default;
-        void iniciar();
+private:
+    std::vector<Produto> produtos_em_estoque; // vector para manter todos os produtos dentro do estoque
+public:
+    Estoque() = default;
 
-        // adicionar produto no estoque
-        void menu_dos_produtos(const std::vector<std::string> &produtos);
-        void adicionar_produtos(const std::vector<std::string> &produtos);
+    // função que inicia o as escolhas do usuario
+    void iniciar();
 
-        void listar_produtos();
+    // adicionar produto no estoque
+    void menu_dos_produtos(const std::vector<std::string> &produtos);
+    void adicionar_produtos(const std::vector<std::string> &produtos);
 
-        void atualizar_produto();
+    // lista os produtos dentro da vector dos produtos_em_estoque que está dentro da classe
+    void listar_produtos();
 
-        void remover_produto();
-        void sair();
+    // atualiza um produto que já está dentro da vector
+    void atualizar_produto();
+
+    // remove o produto da vector
+    void remover_produto();
+
+    // marcação para caso futuro
+    void sair();
 };
