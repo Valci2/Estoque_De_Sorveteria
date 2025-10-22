@@ -1,0 +1,21 @@
+# Diz qual é a versão mínima do CMake necessária para processar esse arquivo
+cmake_minimum_required(VERSION 3.20)
+
+# Define o nome do projeto
+project(Loja)
+
+# Define a versão do C++ que o compilador deve usar, neste caso, o C++20
+set(CMAKE_CXX_STANDARD 20)
+
+# Adiciona o diretório include/ como caminho para os arquivos de cabeçalho (.hpp)
+include_directories(inc)
+
+# Agrupa todos os arquivos automaticamente
+file(GLOB_RECURSE SOURCES
+	src/main.cpp
+	src/Loja.cpp
+    src/Produto.cpp
+)
+
+# Cria o executável do seu programa, chamado Loja
+add_executable(Loja ${SOURCES})
