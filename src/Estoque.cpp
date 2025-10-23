@@ -181,29 +181,28 @@ void Estoque::atualizar_produto() {
     listar_produtos();
     if (produtos_em_estoque.empty()) return;
 
-    int id = ler_valor<int>("Digite o ID do produto a atualizar: ");
+    int id = ler_valor<int>("Digite o ID do produto a atualizar: ") - 1;
 
-    for (auto &p: produtos_em_estoque) {
-        if (p.get_id() == id) {
-            std::cout << "Atualizando produto " << p.get_nome() << "...\n";
-            std::string marca = ler_linha("Nova Marca: ");
-            std::string sabor = ler_linha("Novo Sabor: ");
-            std::string data_de_validade = ler_linha("Nova validade: ");
-            auto preco = ler_valor<double>("Novo Preco: R$");
-            auto quantidade = ler_valor<int>("Quantidade: ");
+    if (id >= 1 && id <= produtos_em_estoque.size()) {
+        std::cout << "Atualizando produto " << produtos_em_estoque[id].get_nome() << "...\n";
+        std::string marca = ler_linha("Nova Marca: ");
+        std::string sabor = ler_linha("Novo Sabor: ");
+        std::string data_de_validade = ler_linha("Nova validade: ");
+        auto preco = ler_valor<double>("Novo Preco: R$");
+        auto quantidade = ler_valor<int>("Quantidade: ");
 
-            if (verificar_produtos(p.get_nome(), marca, sabor, data_de_validade, preco, quantidade)) {
-                remove_o_produto(id);
-                return;
-            }
-            p.set_marca(marca);
-            p.set_sabor(sabor);
-            p.set_data_de_validade(data_de_validade);
-            p.set_preco(preco);
-            p.set_quantidade(quantidade);
-            std::cout << "Produto atualizado com sucesso!" << std::endl;
+        if (verificar_produtos(produtos_em_estoque[id].get_nome(), marca, sabor, data_de_validade, preco, quantidade)) {
+            remove_o_produto(id);
             return;
         }
+
+        produtos_em_estoque[id].set_marca(marca);
+        produtos_em_estoque[id].set_sabor(sabor);
+        produtos_em_estoque[id].set_data_de_validade(data_de_validade);
+        produtos_em_estoque[id].set_preco(preco);
+        produtos_em_estoque[id].set_quantidade(quantidade);
+        std::cout << "Produto atualizado com sucesso!" << std::endl;
+        return;
     }
     std::cout << "Produto com ID " << id << " não encontrado." << std::endl;
 }
@@ -221,22 +220,22 @@ void Estoque::remover_produto() {
     listar_produtos();
 
     // Pega o Id do produto
-    int id = ler_valor<int>("Digite o ID do produto: ");
+    int id = ler_valor<int>("Digite o ID do produto: ") - 1;
     remove_o_produto(id);
 }
 
 void Estoque::remove_o_produto(int id) {
 
     // verifica se o ID existe dentro do tamanho da lista
-    if (id <= 0 || id > (int)produtos_em_estoque.size()) {
+    if (id < 0 || id > (int)produtos_em_estoque.size()) {
         std::cout << "Esse ID nao existe!" << std::endl;
         return;
     }
 
-    // Apaga o produto pelo ID
-    for (auto &p: produtos_em_estoque) {
-        if (p.get_id() == id) {
-            produtos_em_estoque.erase(produtos_em_estoque.begin() + p.get_id());
-        }
+    produtos_em_estoque.erase(produtos_em_estoque.begin() + id);
+
+    for (size_t i = id; i < produtos_em_estoque.size(); i++) {
+        produtos_em_estoque[i].set_id(id + 1);
+        id++;
     }
 }
