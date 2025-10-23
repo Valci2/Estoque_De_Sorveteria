@@ -23,9 +23,9 @@ void Produto::set_quantidade(int quantidade) { this->quantidade = quantidade;}
 
 // getter
 int Produto::get_id() { return id; }
-const std::string &Produto::get_nome() { return nome; }
-const std::string &Produto::get_marca() { return marca; }
-const std::string &Produto::get_sabor() { return sabor; }
-const std::string &Produto::get_data_de_validade() { return data_de_validade; }
+std::string &Produto::get_nome() { return nome; }
+std::string &Produto::get_marca() { return marca; }
+std::string &Produto::get_sabor() { return sabor; }
+std::string &Produto::get_data_de_validade() { return data_de_validade; }
 double Produto::get_preco() { return preco; }
 int Produto::get_quantidade() { return quantidade; }

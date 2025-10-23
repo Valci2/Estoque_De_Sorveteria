@@ -18,10 +18,10 @@ public:
 
     // getter
     int get_id();
-    const std::string &get_nome();
-    const std::string &get_marca();
-    const std::string &get_sabor();
-    const std::string &get_data_de_validade();
+    std::string &get_nome();
+    std::string &get_marca();
+    std::string &get_sabor();
+    std::string &get_data_de_validade();
     double get_preco();
     int get_quantidade();
 
