@@ -15,6 +15,7 @@ file(GLOB_RECURSE SOURCES
 	src/main.cpp
 	src/Estoque.cpp
     src/Produto.cpp
+	src/Interface.cpp
 )
 
 # Cria o executável do seu programa, chamado Loja

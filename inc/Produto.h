@@ -35,5 +35,4 @@ public:
     void set_data_de_validade(std::string &data_de_validade);
     void set_preco(double preco);
     void set_quantidade(int quantidade);
-    void set_codigo_do_produto(std::string &codigo_do_produto);
 };

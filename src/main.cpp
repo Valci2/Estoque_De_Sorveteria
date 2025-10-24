@@ -1,7 +1,7 @@
-#include "Estoque.h"
+#include "Interface.h"
 
 int main(){
-    Estoque loja;
+    Interface loja;
     loja.iniciar();
     return 0;    
 }
