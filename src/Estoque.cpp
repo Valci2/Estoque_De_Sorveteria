@@ -49,12 +49,14 @@ std::string ler_linha(const std::string &mensagem) {
 
 bool Estoque::verificar_produtos(std::string &nome, std::string &marca, std::string &sabor,
                                  std::string &data_de_validade, double preco, int quantidade) {
+    // Mesmo produto (marca/sabor), mesmo lote (validade e preço)
     for (size_t i = 0; i < (int) produtos_em_estoque.size(); i++) {
         if (nome == produtos_em_estoque[i].get_nome() &&
             marca == produtos_em_estoque[i].get_marca() &&
             sabor == produtos_em_estoque[i].get_sabor() &&
             data_de_validade == produtos_em_estoque[i].get_data_de_validade() &&
             preco == produtos_em_estoque[i].get_preco()) {
+            // Mesmo lote → soma quantidade
             produtos_em_estoque[i].set_quantidade(produtos_em_estoque[i].get_quantidade() + quantidade);
             return true;
         }
@@ -66,7 +68,7 @@ bool Estoque::verificar_produtos(std::string &nome, std::string &marca, std::str
 void Estoque::iniciar() {
     int escolha = 0;
     do {
-        // menu das escolhas disponiveis
+        // Menu das escolhas disponiveis
         std::cout << "====== Estoque ======" << std::endl;
         std::cout << "[1] Adicionar Produtos" << std::endl;
         std::cout << "[2] Listar Produtos" << std::endl;
@@ -74,26 +76,18 @@ void Estoque::iniciar() {
         std::cout << "[4] Apagar Produtos" << std::endl;
         std::cout << "[5] Salvar e sair" << std::endl;
         std::cout << "Escolha: ";
-        std::cin >> escolha;
-
-        if (std::cin.fail()) {
-            limpar_entrada();
-        }
+        escolha = ler_valor<int>("Escolha: ");
 
         // escolhas disponiveis
         switch (escolha) {
-            case 1:
-                menu_dos_produtos(produtos_disponiveis);
+            case 1: menu_dos_produtos(produtos_disponiveis);
                 adicionar_produtos(produtos_disponiveis);
                 break;
-            case 2:
-                listar_produtos();
+            case 2: listar_produtos();
                 break;
-            case 3:
-                atualizar_produto();
+            case 3: atualizar_produto();
                 break;
-            case 4:
-                remover_produto();
+            case 4: remover_produto();
                 break;
         }
     } while (escolha != 5);
@@ -110,7 +104,6 @@ void Estoque::menu_dos_produtos(const std::vector<std::string> &produtos) {
 
 // adicona um novo produto
 void Estoque::adicionar_produtos(const std::vector<std::string> &produtos) {
-
     // lê a escolha que o adm quer fazer
     int escolha = ler_valor<int>("Escolha o produto pelo número: ");
     while (escolha < 1 || escolha > (int) produtos.size()) {
@@ -178,12 +171,17 @@ void Estoque::listar_produtos() {
 // ============================== Atualizar o produto do estoque ==============================
 void Estoque::atualizar_produto() {
 
+    // lista todos os produtos para o usuario saber quais itens estão no estoque
     listar_produtos();
+
+    //
     if (produtos_em_estoque.empty()) return;
 
+    //
     int id = ler_valor<int>("Digite o ID do produto a atualizar: ") - 1;
 
-    if (id >= 1 && id <= produtos_em_estoque.size()) {
+    // verifica o ID
+    if (id >= 1 && id <= static_cast<int>(produtos_em_estoque.size())) {
         std::cout << "Atualizando produto " << produtos_em_estoque[id].get_nome() << "...\n";
         std::string marca = ler_linha("Nova Marca: ");
         std::string sabor = ler_linha("Novo Sabor: ");
@@ -191,11 +189,13 @@ void Estoque::atualizar_produto() {
         auto preco = ler_valor<double>("Novo Preco: R$");
         auto quantidade = ler_valor<int>("Quantidade: ");
 
+        // se o produto já existe, e existir um produto igual no vector ele deleta o da vector e adiciona na quantidade do produto já existente
         if (verificar_produtos(produtos_em_estoque[id].get_nome(), marca, sabor, data_de_validade, preco, quantidade)) {
             remove_o_produto(id);
             return;
         }
 
+        // caso o produto não exista
         produtos_em_estoque[id].set_marca(marca);
         produtos_em_estoque[id].set_sabor(sabor);
         produtos_em_estoque[id].set_data_de_validade(data_de_validade);
@@ -204,12 +204,12 @@ void Estoque::atualizar_produto() {
         std::cout << "Produto atualizado com sucesso!" << std::endl;
         return;
     }
+    // caso o id não seja encontrado
     std::cout << "Produto com ID " << id << " não encontrado." << std::endl;
 }
 
 // ============================== Remover Produto ==============================
 void Estoque::remover_produto() {
-
     // Verifica se a lista não é vazia
     if (produtos_em_estoque.empty()) {
         std::cout << "Nao existe nenhum produto" << std::endl;
@@ -225,15 +225,16 @@ void Estoque::remover_produto() {
 }
 
 void Estoque::remove_o_produto(int id) {
-
-    // verifica se o ID existe dentro do tamanho da lista
-    if (id < 0 || id > (int)produtos_em_estoque.size()) {
+    // Verifica se o ID existe dentro do tamanho da lista
+    if (id < 0 || id > (int) produtos_em_estoque.size()) {
         std::cout << "Esse ID nao existe!" << std::endl;
         return;
     }
 
+    // Apaga o produto
     produtos_em_estoque.erase(produtos_em_estoque.begin() + id);
 
+    // Reatribui IDs
     for (size_t i = id; i < produtos_em_estoque.size(); i++) {
         produtos_em_estoque[i].set_id(id + 1);
         id++;

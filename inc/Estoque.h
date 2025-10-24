@@ -26,6 +26,7 @@ public:
     void remover_produto();
     void remove_o_produto(int id);
 
-    // marcação para caso futuro
-    void sair();
+    // ================================= IMPLEMENTAÇÂO PARA SALVAR O ARQUIVO =================================
+    void salvar_arquivo();
+    void carregar_arquivo();
 };
