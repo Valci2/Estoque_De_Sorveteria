@@ -120,10 +120,18 @@ void Estoque::adicionar_produtos(const std::vector<std::string> &produtos) {
     auto preco = ler_valor<double>("Preco: R$");
     auto quantidade = ler_valor<int>("Quantidade: ");
 
+    // Gera um código e garante que ele seja único
+    std::string codigo_do_produto;
+    do {
+        codigo_do_produto = gerar_codigo_aleatorio();
+    } while (codigo_existe(codigo_do_produto)); // Loop até encontrar um código único
+
+    std::cout << "Produto novo. Código gerado: " << codigo_do_produto << std::endl;
+
     // Verifica se o produto existe
     if (!verificar_produtos(nome, marca, sabor, data_de_validade, preco, quantidade)) {
         // adiciona o produto no estoque
-        Produto produto_criado(id, nome, marca, sabor, data_de_validade, preco, quantidade); // cria o produto
+        Produto produto_criado(id, nome, marca, sabor, data_de_validade, preco, quantidade, codigo_do_produto); // cria o produto
         produtos_em_estoque.push_back(produto_criado); // adicionar ao estoque
     }
 }
@@ -143,27 +151,29 @@ void Estoque::listar_produtos() {
     }
 
     // mostra os produtos em estoque
-    cout << "================================= Produtos em estoque =================================" << endl;
+    cout << "================================================ Produtos em estoque ================================================" << endl;
 
     // centraliza os status do produto
-    cout << setw(5) << left << "ID"
+    cout << setw(7) << left << "ID"
             << setw(15) << left << "Nome"
             << setw(15) << left << "Marca"
             << setw(15) << left << "Sabor"
             << setw(15) << left << "Validade"
             << setw(10) << right << "Preço"
-            << setw(12) << right << "Qtd" << endl;
-    cout << std::string(87, '-') << endl;
+            << setw(15) << right << "Qtd"
+            << setw(25) << right << "Codigo do produto" << endl;
+    cout << std::string(117, '-') << endl;
 
     // centraliza os itens do produto
     for (auto &p: produtos_em_estoque) {
-        cout << setw(5) << left << p.get_id()
+        cout << setw(7) << left << p.get_id()
                 << setw(15) << left << p.get_nome()
                 << setw(15) << left << p.get_marca()
                 << setw(15) << left << p.get_sabor()
                 << setw(15) << left << p.get_data_de_validade()
                 << setw(10) << right << std::fixed << std::setprecision(2) << p.get_preco()
-                << setw(12) << right << p.get_quantidade()
+                << setw(15) << right << p.get_quantidade()
+                << setw(25) << right << p.get_codigo_do_produto()
                 << endl;
     }
 }
@@ -174,10 +184,10 @@ void Estoque::atualizar_produto() {
     // lista todos os produtos para o usuario saber quais itens estão no estoque
     listar_produtos();
 
-    //
+    // verifica se o produto está vazio
     if (produtos_em_estoque.empty()) return;
 
-    //
+    // Pego o Id que ele quer atualizar
     int id = ler_valor<int>("Digite o ID do produto a atualizar: ") - 1;
 
     // verifica o ID
@@ -204,7 +214,7 @@ void Estoque::atualizar_produto() {
         std::cout << "Produto atualizado com sucesso!" << std::endl;
         return;
     }
-    // caso o id não seja encontrado
+    // Caso o Id não seja encontrado
     std::cout << "Produto com ID " << id << " não encontrado." << std::endl;
 }
 
@@ -225,6 +235,7 @@ void Estoque::remover_produto() {
 }
 
 void Estoque::remove_o_produto(int id) {
+
     // Verifica se o ID existe dentro do tamanho da lista
     if (id < 0 || id > (int) produtos_em_estoque.size()) {
         std::cout << "Esse ID nao existe!" << std::endl;
@@ -239,4 +250,33 @@ void Estoque::remove_o_produto(int id) {
         produtos_em_estoque[i].set_id(id + 1);
         id++;
     }
+}
+
+// Função privada para gerar um código aleatório de 7 caracteres
+std::string Estoque::gerar_codigo_aleatorio() {
+    // Define os caracteres permitidos no código
+    const std::string CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    // Cria uma distribuição uniforme para escolher índices do CHARSET
+    std::uniform_int_distribution<> dis(0, CHARSET.length() - 1);
+
+    std::string codigo;
+    codigo.reserve(7);
+
+    for (int i = 0; i < 7; ++i) {
+        codigo += CHARSET[dis(gen)]; // 'gen' é o membro da classe que inicializamos
+    }
+    return codigo;
+}
+
+// Função privada para verificar se um código já existe no estoque
+bool Estoque::codigo_existe(const std::string& codigo) {
+    // Itera por todos os produtos no vetor
+    for (auto& produto : produtos_em_estoque) {
+        // Aqui você USA o getter que criou na classe Produto
+        if (produto.get_codigo_do_produto() == codigo) {
+            return true; // Encontrou um código igual
+        }
+    }
+    return false; // Não encontrou o código, é único
 }

@@ -1,10 +1,17 @@
 #pragma once
 #include "Produto.h"
 #include <vector>
+#include <string>
+#include <random> // <--- ADICIONE ISSO
 
 class Estoque {
 private:
     std::vector<Produto> produtos_em_estoque; // vector para manter todos os produtos dentro do estoque
+
+    std::mt19937 gen;
+
+    std::string gerar_codigo_aleatorio();
+    bool codigo_existe(const std::string& codigo);
 public:
     Estoque() = default;
 
