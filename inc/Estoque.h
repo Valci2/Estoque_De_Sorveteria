@@ -2,7 +2,7 @@
 #include "Produto.h"
 #include <vector>
 #include <string>
-#include <random> // <--- ADICIONE ISSO
+#include <random>
 
 class Estoque {
 private:
@@ -13,8 +13,10 @@ private:
     std::string gerar_codigo_aleatorio();
     bool codigo_existe(const std::string& codigo);
 
+    void carregarDoCSV(const std::string& nomeArquivo);
+
 public:
-    Estoque() = default;
+    Estoque();
 
     bool adicionar_produto(std::string nome, std::string marca, std::string sabor, std::string data_de_validade, double preco, int quantidade);
 
@@ -23,4 +25,5 @@ public:
 
     std::vector<Produto> get_todos_os_produtos();
     bool remover_produto(int id);
+    void salvarParaCSV(const std::string& nomeArquivo); /* Para criar o arquivo .csv */
 };
