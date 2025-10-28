@@ -47,7 +47,11 @@ void Interface::iniciar() {
             case 2: ui_listar_produtos(); break;
             case 3: ui_atualizar_produto(); break;
             case 4: ui_remover_produto(); break;
-            case 5: std::cout << "Salvando e saindo..." << std::endl; break;
+            case 5: 
+                std::cout << "Salvando dados em [estoque.csv]..." << std::endl;
+                m_estoque.salvarParaCSV("estoque.csv");
+                std::cout << "Saindo do programa." << std::endl; break;
+                
             default: std::cout << "Opção inválida." << std::endl; break;
         }
         std::cout << "\n"; // Espaço entre as operações
