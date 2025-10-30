@@ -1,6 +1,7 @@
 #include "Interface.h"
 #include <iostream>
 #include <iomanip> // std::setw, std::left, std::right
+#include <cstdlib>
 
 // limpa a entrada de uma resposta errada
 void Interface::limpar_entrada() {
@@ -54,23 +55,33 @@ void Interface::iniciar() {
                 
             default: std::cout << "Opção inválida." << std::endl; break;
         }
-        std::cout << "\n"; // Espaço entre as operações
+
+        if (escolha != 5) {
+            std::cout << "\n\nPressione ENTER para continuar...";
+            std::cin.get();
+        }
+        
     } while (escolha != 5);
 }
 
 void Interface::exibir_menu_principal() {
+    system("cls");
     // Menu das escolhas disponiveis
-    std::cout << "====== Estoque ======" << std::endl;
-    std::cout << "[1] Adicionar Produtos" << std::endl;
-    std::cout << "[2] Listar Produtos" << std::endl;
-    std::cout << "[3] Atualizar Produtos" << std::endl;
-    std::cout << "[4] Apagar Produtos" << std::endl;
-    std::cout << "[5] Salvar e sair" << std::endl;
+    std::cout << "+-----------------------------------+\n";
+    std::cout << "|       ESTOQUE DA SORVETERIA       |\n";
+    std::cout << "+-----------------------------------+\n";
+    std::cout << "| [1] Adicionar Produtos            |\n";
+    std::cout << "| [2] Listar Produtos               |\n";
+    std::cout << "| [3] Atualizar Produtos            |\n";
+    std::cout << "| [4] Apagar Produtos               |\n";
+    std::cout << "| [5] Salvar e sair                 |\n";
+    std::cout << "+-----------------------------------+\n";
 }
 
 // ====================== Funções da UI ======================
 
 void Interface::ui_adicionar_produtos() {
+    system("cls");
     menu_dos_produtos(produtos_disponiveis);
 
     int escolha = ler_valor<int>("Escolha o produto pelo número: ");
@@ -97,6 +108,7 @@ void Interface::ui_adicionar_produtos() {
 }
 
 void Interface::ui_listar_produtos() {
+    system("cls");
     using std::cout;
     using std::endl;
     using std::setw;
@@ -105,7 +117,7 @@ void Interface::ui_listar_produtos() {
 
     // verifica se a lista tá vazia
     if (m_estoque.get_todos_os_produtos().empty()) {
-        cout << "Não temos produtos em estoque" << endl;
+        cout << "Nao temos produtos em estoque" << endl;
         return;
     }
 
@@ -118,7 +130,7 @@ void Interface::ui_listar_produtos() {
             << setw(15) << left << "Marca"
             << setw(15) << left << "Sabor"
             << setw(15) << left << "Validade"
-            << setw(10) << right << "Preço"
+            << setw(10) << right << "Preco"
             << setw(15) << right << "Qtd"
             << setw(25) << right << "Codigo do produto" << endl;
     cout << std::string(117, '-') << endl;
@@ -141,14 +153,15 @@ void Interface::ui_atualizar_produto() {
 
     // verifica se a lista tá vazia
     if (m_estoque.get_todos_os_produtos().empty()) {
-        std::cout << "Não temos produtos em estoque" << std::endl;
+        system("cls");
+        std::cout << "Nao temos produtos em estoque" << std::endl;
         return;
     }
 
     ui_listar_produtos();
 
     int id = ler_valor<int>("Digite o ID do produto que voce quer atualizar: ");
-    if (id >= 1 && id <= static_cast<int>(m_estoque.get_todos_os_produtos().size() - 1)) {
+    if (id >= 1 && id <= static_cast<int>(m_estoque.get_todos_os_produtos().size())) {
         std::string nome = m_estoque.get_todos_os_produtos()[id - 1].get_nome();
         std::string marca = ler_linha("Nova Marca: ");
         std::string sabor = ler_linha("Novo Sabor: ");
@@ -174,22 +187,28 @@ void Interface::ui_remover_produto() {
 
     // verifica se a lista tá vazia
     if (m_estoque.get_todos_os_produtos().empty()) {
-        std::cout << "Não temos produtos em estoque" << std::endl;
+        system("cls");
+        std::cout << "Nao temos produtos em estoque" << std::endl;
         return;
     }
 
     ui_listar_produtos();
 
     int id = ler_valor<int>("Digite o ID do produto que voce quer remover: ");
-    if (id >= 1 && id <= static_cast<int>(m_estoque.get_todos_os_produtos().size() - 1)) {
+    if (id >= 1 && id <= static_cast<int>(m_estoque.get_todos_os_produtos().size())) {
         m_estoque.remover_produto(id - 1);
+        std::cout << "Produto removido com sucesso." << std::endl;
+    } else {
+        std::cout << "Id do produto nao encontrado" << std::endl;
     }
 }
 
 void Interface::menu_dos_produtos(const std::vector<std::string> &produtos) {
-    std::cout << "===== Produtos =====" << std::endl;
+    std::cout << "+--------------------+\n";
+    std::cout << "|      PRODUTOS      |\n";
+    std::cout << "+--------------------+\n";
     for (size_t i = 0; i < produtos.size(); i++) {
-        std::cout << "[" << i + 1 << "] " << produtos[i] << std::endl;
+        std::cout << "| [" << i + 1 << "] " << std::setw(13) << std::left << produtos[i] << " |\n";
     }
-    std::cout << "=====================" << std::endl;
+    std::cout << "+--------------------+\n";
 }
