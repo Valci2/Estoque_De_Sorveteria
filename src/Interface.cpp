@@ -9,6 +9,15 @@ void Interface::limpar_entrada() {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
+// apagar texto
+void Interface::limpar_terminal() {
+    #ifdef _WIN32
+        system("cls");
+    #elif __linux__
+        system("clear");
+    #endif
+}
+
 // Lê um valor genérico com validação de tipo
 template<typename T>
 T Interface::ler_valor(const std::string &mensagem) {
@@ -65,7 +74,7 @@ void Interface::iniciar() {
 }
 
 void Interface::exibir_menu_principal() {
-    system("cls");
+    limpar_terminal();
     // Menu das escolhas disponiveis
     std::cout << "+-----------------------------------+\n";
     std::cout << "|       ESTOQUE DA SORVETERIA       |\n";
@@ -81,7 +90,7 @@ void Interface::exibir_menu_principal() {
 // ====================== Funções da UI ======================
 
 void Interface::ui_adicionar_produtos() {
-    system("cls");
+    limpar_terminal();
     menu_dos_produtos(produtos_disponiveis);
 
     int escolha = ler_valor<int>("Escolha o produto pelo número: ");
@@ -108,7 +117,7 @@ void Interface::ui_adicionar_produtos() {
 }
 
 void Interface::ui_listar_produtos() {
-    system("cls");
+    limpar_terminal();
     using std::cout;
     using std::endl;
     using std::setw;
@@ -153,7 +162,7 @@ void Interface::ui_atualizar_produto() {
 
     // verifica se a lista tá vazia
     if (m_estoque.get_todos_os_produtos().empty()) {
-        system("cls");
+        limpar_terminal();
         std::cout << "Nao temos produtos em estoque" << std::endl;
         return;
     }
@@ -187,7 +196,7 @@ void Interface::ui_remover_produto() {
 
     // verifica se a lista tá vazia
     if (m_estoque.get_todos_os_produtos().empty()) {
-        system("cls");
+        limpar_terminal();
         std::cout << "Nao temos produtos em estoque" << std::endl;
         return;
     }
@@ -208,7 +217,7 @@ void Interface::menu_dos_produtos(const std::vector<std::string> &produtos) {
     std::cout << "|      PRODUTOS      |\n";
     std::cout << "+--------------------+\n";
     for (size_t i = 0; i < produtos.size(); i++) {
-        std::cout << "| [" << i + 1 << "] " << std::setw(13) << std::left << produtos[i] << " |\n";
+        std::cout << "| [" << i + 1 << "] " << std::setw(14) << std::left << produtos[i] << " |\n";
     }
     std::cout << "+--------------------+\n";
 }

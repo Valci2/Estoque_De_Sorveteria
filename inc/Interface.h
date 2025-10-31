@@ -32,6 +32,8 @@ private:
     T ler_valor(const std::string &mensagem);
 
     std::string ler_linha(const std::string &mensagem);
+
+    void limpar_terminal();
 public:
     void iniciar();
 };

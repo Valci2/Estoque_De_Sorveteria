@@ -59,9 +59,7 @@ bool Estoque::adicionar_produto(std::string nome, std::string marca, std::string
     std::string codigo_do_produto = gerar_codigo_aleatorio();
     Produto produto(id, nome, marca, sabor, data_de_validade, preco, quantidade, codigo_do_produto);
     bool existe = verificar_produto_existe(produto);
-    if (existe) {
-        return true;
-    }
+    if (existe) return true;
     produtos_em_estoque.push_back(produto);
     return false;
 }
