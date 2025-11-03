@@ -1,4 +1,4 @@
-#include "Estoque.h"
+#include "../../inc/negocio/Estoque.h"
 #include <string>
 #include <fstream>  /* Para o .csv */
 #include <sstream>
@@ -45,13 +45,11 @@ void Estoque::carregarDoCSV(const std::string& nomeArquivo) {
         } catch (const std::exception& e) {
             continue;
         }
-
         adicionar_produto(nome, marca, sabor, data, preco, quantidade);
     }
 
     arquivo.close();
 }
-
 
 bool Estoque::adicionar_produto(std::string nome, std::string marca, std::string sabor, std::string data_de_validade, double preco, int quantidade) {
 
@@ -85,7 +83,7 @@ bool Estoque::atualizar_produto(Produto &produto) {
     return false;
 }
 
-bool Estoque::remover_produto(int id) {
+void Estoque::remover_produto(int id) {
 
     produtos_em_estoque.erase(produtos_em_estoque.begin() + id);
 

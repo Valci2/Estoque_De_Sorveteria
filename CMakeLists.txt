@@ -13,9 +13,15 @@ include_directories(inc)
 # Agrupa todos os arquivos automaticamente
 file(GLOB_RECURSE SOURCES
 	src/main.cpp
-	src/Estoque.cpp
-    src/Produto.cpp
-	src/Interface.cpp
+		src/negocios/adm.cpp
+		src/negocios/Loja.cpp
+		src/negocios/User.cpp
+		src/negocios/Estoque.cpp
+		src/negocios/Produto.cpp
+		src/interfaces/UIadm.cpp
+		src/interfaces/UIuser.cpp
+		src/interfaces/UIloja.cpp
+		src/interfaces/UIestoque.cpp
 )
 
 # Cria o executável do seu programa, chamado Loja

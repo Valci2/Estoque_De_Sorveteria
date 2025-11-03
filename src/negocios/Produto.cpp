@@ -1,4 +1,4 @@
-#include "Produto.h"
+#include "../../inc/negocio/Produto.h"
 
 // construtor
 Produto::Produto(int id, std::string &nome, std::string &marca, std::string &sabor, std::string &data_de_validade,

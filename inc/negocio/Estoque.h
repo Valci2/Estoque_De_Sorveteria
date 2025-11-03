@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Produto.h"
 #include <vector>
 #include <string>
@@ -24,6 +25,6 @@ public:
     bool atualizar_produto(Produto &produtos);
 
     std::vector<Produto> get_todos_os_produtos();
-    bool remover_produto(int id);
+    void remover_produto(int id);
     void salvarParaCSV(const std::string& nomeArquivo); /* Para criar o arquivo .csv */
 };

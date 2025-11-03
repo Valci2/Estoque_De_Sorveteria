@@ -1,16 +1,15 @@
-#include "Interface.h"
+#include "../../inc/interface/UIestoque.h"
 #include <iostream>
 #include <iomanip> // std::setw, std::left, std::right
-#include <cstdlib>
 
 // limpa a entrada de uma resposta errada
-void Interface::limpar_entrada() {
+void UIestoque::limpar_entrada() {
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 // apagar texto
-void Interface::limpar_terminal() {
+void UIestoque::limpar_terminal() {
     #ifdef _WIN32
         system("cls");
     #elif __linux__
@@ -20,7 +19,7 @@ void Interface::limpar_terminal() {
 
 // Lê um valor genérico com validação de tipo
 template<typename T>
-T Interface::ler_valor(const std::string &mensagem) {
+T UIestoque::ler_valor(const std::string &mensagem) {
     T valor;
     while (true) {
         std::cout << mensagem;
@@ -29,13 +28,13 @@ T Interface::ler_valor(const std::string &mensagem) {
             limpar_entrada();
             return valor;
         }
-        std::cout << "Entrada inválida. Tente novamente.\n";
+        std::cout << "Entrada invalida. Tente novamente.\n";
         limpar_entrada();
     }
 }
 
 // Lê uma string completa (com espaços)
-std::string Interface::ler_linha(const std::string &mensagem) {
+std::string UIestoque::ler_linha(const std::string &mensagem) {
     std::string linha;
     std::cout << mensagem;
     std::getline(std::cin, linha);
@@ -46,8 +45,7 @@ std::string Interface::ler_linha(const std::string &mensagem) {
     return linha;
 }
 
-
-void Interface::iniciar() {
+void UIestoque::iniciar() {
     int escolha = 0;
     do {
         exibir_menu_principal();
@@ -57,23 +55,20 @@ void Interface::iniciar() {
             case 2: ui_listar_produtos(); break;
             case 3: ui_atualizar_produto(); break;
             case 4: ui_remover_produto(); break;
-            case 5: 
-                std::cout << "Salvando dados em [estoque.csv]..." << std::endl;
-                m_estoque.salvarParaCSV("estoque.csv");
-                std::cout << "Saindo do programa." << std::endl; break;
-                
-            default: std::cout << "Opção inválida." << std::endl; break;
+            default: std::cout << "Opção invalida." << std::endl; break;
         }
-
         if (escolha != 5) {
             std::cout << "\n\nPressione ENTER para continuar...";
             std::cin.get();
         }
-        
     } while (escolha != 5);
+    std::cout << "Salvando dados em [estoque.csv]..." << std::endl;
+    m_estoque.salvarParaCSV("estoque.csv");
+    std::cout << "Saindo do programa." << std::endl;
+
 }
 
-void Interface::exibir_menu_principal() {
+void UIestoque::exibir_menu_principal() {
     limpar_terminal();
     // Menu das escolhas disponiveis
     std::cout << "+-----------------------------------+\n";
@@ -88,8 +83,7 @@ void Interface::exibir_menu_principal() {
 }
 
 // ====================== Funções da UI ======================
-
-void Interface::ui_adicionar_produtos() {
+void UIestoque::ui_adicionar_produtos() {
     limpar_terminal();
     menu_dos_produtos(produtos_disponiveis);
 
@@ -116,7 +110,7 @@ void Interface::ui_adicionar_produtos() {
     }
 }
 
-void Interface::ui_listar_produtos() {
+void UIestoque::ui_listar_produtos() {
     limpar_terminal();
     using std::cout;
     using std::endl;
@@ -158,7 +152,7 @@ void Interface::ui_listar_produtos() {
     }
 }
 
-void Interface::ui_atualizar_produto() {
+void UIestoque::ui_atualizar_produto() {
 
     // verifica se a lista tá vazia
     if (m_estoque.get_todos_os_produtos().empty()) {
@@ -192,7 +186,7 @@ void Interface::ui_atualizar_produto() {
     }
 }
 
-void Interface::ui_remover_produto() {
+void UIestoque::ui_remover_produto() {
 
     // verifica se a lista tá vazia
     if (m_estoque.get_todos_os_produtos().empty()) {
@@ -212,7 +206,7 @@ void Interface::ui_remover_produto() {
     }
 }
 
-void Interface::menu_dos_produtos(const std::vector<std::string> &produtos) {
+void UIestoque::menu_dos_produtos(const std::vector<std::string> &produtos) {
     std::cout << "+--------------------+\n";
     std::cout << "|      PRODUTOS      |\n";
     std::cout << "+--------------------+\n";

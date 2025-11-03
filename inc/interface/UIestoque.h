@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Estoque.h"
+#include "../negocio/Estoque.h"
 #include <vector>
 #include <string>
 
-class Interface {
+class UIestoque {
 private:
 
     Estoque m_estoque; // A instância da lógica de estoque
