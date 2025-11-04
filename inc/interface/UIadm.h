@@ -1,5 +1,4 @@
 #pragma once
-#include "negocio/Adm.h"
 
 class UIadm {
 public:

@@ -5,10 +5,11 @@
 class Adm : public User {
 private:
     std::string senha;
+    std::string email;
 public:
 
 Adm() = default;
-Adm(int id, std::string& nome, std::string& senha);
+Adm(int id, std::string& nome, std::string& senha, const std::string& email);
 ~Adm() = default;
 
 bool logar(std::string &nome, std::string &senha);

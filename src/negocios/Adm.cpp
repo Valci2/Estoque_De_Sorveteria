@@ -1,10 +1,9 @@
 #include "negocio/Adm.h"
 
-Adm::Adm(int id, std::string& nome, std::string& senha) : User(id, nome), senha(senha) {}
-
+Adm::Adm(int id, std::string& nome, std::string& senha, const std::string &email) : User(id, nome), senha(senha), email(email) {}
 
 bool Adm::logar(std::string &nome, std::string& senha) {
-    if (nome.compare("Adm") == 0 || senha.compare("Adm") == 0) {
+    if (nome.compare("adm") == 0 || senha.compare("adm") == 0) {
         return true;
     }
     return false;
