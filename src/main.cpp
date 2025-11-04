@@ -1,4 +1,5 @@
-#include "../inc/interface/UIestoque.h"
+#include "interface/UIestoque.h"
+#include "interface/UIadm.h"
 #include <iostream>
 
 // adm = usuario e senha
@@ -24,6 +25,8 @@ int main(){
             case 1:
                 break;
             case 2:
+                UIadm interface_adm;
+                interface_adm.iniciar();
                 UIestoque estoque;
                 estoque.iniciar();
                 break;
