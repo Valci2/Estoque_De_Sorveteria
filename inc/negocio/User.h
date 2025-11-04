@@ -8,7 +8,7 @@ private:
 
 public:
     User() = default;
-    User(int id, std::string nome);
+    User(int id, std::string &nome);
 
     virtual void criar();
     virtual bool logar();

@@ -26,6 +26,4 @@ file(GLOB_RECURSE SOURCES
 )
 
 # Cria o executável do seu programa, chamado Loja
-add_executable(Estoque ${SOURCES}
-		inc/negocio/cliente.h
-		src/negocios/User.cpp)
+add_executable(Estoque ${SOURCES})

@@ -2,20 +2,10 @@
 
 Adm::Adm(int id, std::string& nome, std::string& senha, std::string& email) : User(id, nome), senha(senha), email(email) {}
 
-void criar(std::string& nome, std::string& senha, std::string& email) {
-    int novo_id = static_cast<int>(Adm::adms_existentes.size());
-    Adm novo_adm(static_cast<int> (novo_id, nome, senha, email);
-    Adm::adms_existentes.push_back(novo_adm);
+void Adm::criar(std::string& nome, std::string& senha, std::string& email) {
 }
 
-bool logar() {
-    for (auto& adm : Adm::adms_existentes) {
-        if (adm.get_nome() == nome &&
-            adm.get_senha() == senha &&
-            adm.get_email() == email) {
-            return true;
-        }
-    }
+bool Adm::logar(std::vector<Adm> adms) {
     return false;
 }
 
