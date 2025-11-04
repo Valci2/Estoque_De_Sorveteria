@@ -247,7 +247,7 @@ void UIestoque::ui_listar_produtos() {
     const int largura_total = 120; // largura total da tabela
 
     cout << endl
-         << std::string(largura_total, '=') << endl;
+    << std::string(largura_total, '=') << endl;
     cout << centralizar_texto("PRODUTOS EM ESTOQUE", largura_total) << endl;
     cout << std::string(largura_total, '=') << endl;
 

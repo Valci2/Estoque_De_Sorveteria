@@ -25,10 +25,12 @@ UIcliente::UIcliente(Estoque& estoque) : meuEstoque(estoque) {
 void UIcliente::mostrarMenuPrincipal() {
     int escolha = 0;
     while (escolha != 3) {
-        std::cout << "\n--- Menu Principal ---" << std::endl;
-        std::cout << "[1] Listar Estoque" << std::endl;
-        std::cout << "[2] Solicitar Reserva" << std::endl;
-        std::cout << "[3] Sair (Deslogar)" << std::endl;
+        std::cout << "+======================+" << std::endl;
+        std::cout << "|    Menu Principal    |" << std::endl;
+        std::cout << "+======================+" << std::endl;
+        std::cout << " [1] Listar Estoque     " << std::endl;
+        std::cout << " [2] Solicitar Reserva  " << std::endl;
+        std::cout << " [3] Sair (Deslogar)    " << std::endl;
         std::cout << "Escolha: ";
         std::cin >> escolha;
 
@@ -55,7 +57,9 @@ void UIcliente::mostrarMenuPrincipal() {
 
 /* Função para lisatr o estoque */
 void UIcliente::executarListarEstoque() {
-    std::cout << "\n--- Produtos disponiveis ---" << std::endl;
+    std::cout << "+========================================================+" << std::endl;
+    std::cout << "|                  Produtos Disponiveis                  |" << std::endl;
+    std::cout << "+========================================================+" << std::endl;
     std::vector<Produto> produtos = meuEstoque.get_todos_os_produtos();
 
     if (produtos.empty()) {
@@ -64,27 +68,27 @@ void UIcliente::executarListarEstoque() {
     }
     
     std::cout << std::left 
-              << std::setw(5) << "ID"
-              << std::setw(20) << "Nome"
+              << std::setw(7) << "ID"
+              << std::setw(15) << "Nome"
               << std::setw(15) << "Sabor"
-              << std::setw(10) << "Preco"
-              << std::setw(5) << "Qtd." 
+              << std::setw(15) << "Preco"
+              << std::setw(10) << "Qtd."
               << std::endl;
-    std::cout << "---------------------------------------------------------" << std::endl;
+    std::cout << "==========================================================" << std::endl;
     
     /* Mostra somente 2 casas decimais no preço */
     std::cout << std::fixed << std::setprecision(2);
     /* Imprime os produtos */
     for (Produto& p : produtos) {
         std::cout << std::left
-                  << std::setw(5) << p.get_id()
-                  << std::setw(20) << p.get_nome()
-                  << std::setw(15) << p.get_sabor()
-                  << "R$" << std::setw(7) << p.get_preco()
-                  << std::setw(5) << p.get_quantidade()
+                  << std::setw(7) << p.get_id()
+                  << std::setw(16) << p.get_nome()
+                  << std::setw(13) << p.get_sabor()
+                  << "R$" << std::setw(14) << p.get_preco()
+                  << std::setw(10) << p.get_quantidade()
                   << std::endl;
     }
-    std::cout << "---------------------------------------------------------" << std::endl;
+    std::cout << "==========================================================" << std::endl;
 }
 
 /* Função para solicitar a reserva. OBS: Ela não altera nada no estoque */
@@ -95,7 +99,9 @@ void UIcliente::executarSolicitarReserva() {
     int idProduto;
     int qtdDesejada;
 
-    std::cout << "\n--- Solicitar Reserva ---" << std::endl;
+    std::cout << "+===========================+" << std::endl;
+    std::cout << "|     Solicitar Reserva     |" << std::endl;
+    std::cout << "+===========================+" << std::endl;
     std::cout << "Digite o [ID] do produto que deseja reservar (ou 0 para cancelar): ";
     std::cin >> idProduto;
 
@@ -131,6 +137,7 @@ void UIcliente::executarSolicitarReserva() {
         std::cout << "Quantidade invalida." << std::endl;
         return;
     }
+
     if (qtdDesejada > maxEstoque) {
         std::cout << "ERRO: Quantidade solicitada (" << qtdDesejada 
                   << ") excede o limite do estoque (" << maxEstoque << ")." << std::endl;
@@ -145,17 +152,19 @@ void UIcliente::executarSolicitarReserva() {
                    << qtdDesejada << "\n";
     arquivoReserva.close();
 
-    std::cout << "---------------------------------------------------------" << std::endl;
+    std::cout << "=========================================================" << std::endl;
     std::cout << "Reserva solicitada com sucesso!" << std::endl;
     std::cout << "Voce solicitou a reserva de " << qtdDesejada << " " << produtoEncontrado->get_nome() <<"(s)"<<std::endl;
     std::cout << "(Um administrador ira processar seu pedido e entrara em contato por e-mail)" << std::endl;
-    std::cout << "---------------------------------------------------------" << std::endl;
+    std::cout << "=========================================================" << std::endl;
 }
 
 /* Função de login */
 std::string UIcliente::executarLogin() {
     std::string loginInput, senhaInput;
-    std::cout << "\n--- Login ---" << std::endl;
+    std::cout << "+=======================+" << std::endl;
+    std::cout << "|         Login         |" << std::endl;
+    std::cout << "+=======================+" << std::endl;
     std::cout << "Digite seu Nome (login): ";
     std::cin.ignore(); 
     std::getline(std::cin, loginInput);
@@ -198,7 +207,9 @@ void UIcliente::mostrarMenuLogin() {
     int escolha = 0;
     while (escolha != 3) {
         limpar_terminal();
-        std::cout << "\n--- SEJA BEM-VINDO(A) ---" << std::endl;
+        std::cout << "+=======================+" << std::endl;
+        std::cout << "|   SEJA BEM-VINDO(A)   |" << std::endl;
+        std::cout << "+=======================+" << std::endl;
         std::cout << "[1] Criar Conta" << std::endl;
         std::cout << "[2] Logar" << std::endl;
         std::cout << "[3] Sair do Programa" << std::endl;

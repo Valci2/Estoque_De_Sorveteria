@@ -7,16 +7,18 @@ private:
     std::string nome;
 
 public:
+    //
     User() = default;
     User(int id, std::string &nome);
     ~User() = default;
 
+    //
     virtual void criar();
     virtual bool logar();
     virtual int get_id();
     virtual std::string get_nome();
 
     /* setters */
-    void set_id(int id);
-    void set_nome(const std::string &nome);
+    virtual void set_id(int id);
+    virtual void set_nome(const std::string &nome);
 };

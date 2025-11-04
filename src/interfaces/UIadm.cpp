@@ -42,9 +42,9 @@ bool UIadm::ui_logar() {
     std::string nome = "";
     std::string senha = "";
     std::cout << "+======================================================+" << std::endl;
-    std::cout << "| Nome : ";
+    std::cout << " Nome : ";
     std::cin >> nome;
-    std::cout << "| senha : ";
+    std::cout << " senha : ";
     std::cin >> senha;
     std::cout << "+======================================================+" << std::endl;
 

@@ -14,14 +14,12 @@ include_directories(inc)
 file(GLOB_RECURSE SOURCES
 	src/main.cpp
 		src/negocios/Adm.cpp
-		src/negocios/Loja.cpp
 		src/negocios/Estoque.cpp
 		src/negocios/Produto.cpp
 		src/negocios/Cliente.cpp
 		src/negocios/User.cpp
 		src/interfaces/UIadm.cpp
 		src/interfaces/UIcliente.cpp
-		src/interfaces/UIloja.cpp
 		src/interfaces/UIestoque.cpp
 )
 

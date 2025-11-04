@@ -14,7 +14,7 @@ int main() {
     Estoque meuEstoque;
     while (escolha != 1 && escolha != 2) {
         std::cout << "{=========================}" << std::endl;
-        std::cout << "|           OLA           |" << std::endl;
+        std::cout << "|     Seja bem vindo      |" << std::endl;
         std::cout << "|                         |" << std::endl;
         std::cout << "| Voce eh Usuario ou Adm? |" << std::endl;
         std::cout << "| [1] usuario             |" << std::endl;
