@@ -25,5 +25,5 @@ file(GLOB_RECURSE SOURCES
 		src/interfaces/UIestoque.cpp
 )
 
-# Cria o executável do seu programa, chamado Loja
+# Cria o executável do seu programa, chamado Estoque
 add_executable(Estoque ${SOURCES})
