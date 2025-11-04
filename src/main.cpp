@@ -27,8 +27,6 @@ int main(){
             case 2:
                 UIadm interface_adm;
                 interface_adm.iniciar();
-                UIestoque estoque;
-                estoque.iniciar();
                 break;
         }
     }

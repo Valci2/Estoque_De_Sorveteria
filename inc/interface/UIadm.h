@@ -1,13 +1,11 @@
 #pragma once
+#include "negocio/Adm.h"
 
 class UIadm {
 public:
     UIadm() = default;
 
     void iniciar();
-    void ui_criar();
-    void ui_logar();
-    void ui_atualizar();
-    void ui_deletar();
+    bool ui_logar();
 };
 

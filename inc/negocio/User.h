@@ -9,6 +9,7 @@ private:
 public:
     User() = default;
     User(int id, std::string &nome);
+    ~User() = default;
 
     virtual void criar();
     virtual bool logar();
