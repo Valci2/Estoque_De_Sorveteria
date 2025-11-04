@@ -147,7 +147,7 @@ void UIcliente::executarSolicitarReserva() {
 
     std::cout << "---------------------------------------------------------" << std::endl;
     std::cout << "Reserva solicitada com sucesso!" << std::endl;
-    std::cout << "Voce solicitou a reserva de " << qtdDesejada << "x " << produtoEncontrado->get_nome() << std::endl;
+    std::cout << "Voce solicitou a reserva de " << qtdDesejada << " " << produtoEncontrado->get_nome() <<"(s)"<<std::endl;
     std::cout << "(Um administrador ira processar seu pedido e entrara em contato por e-mail)" << std::endl;
     std::cout << "---------------------------------------------------------" << std::endl;
 }
@@ -157,7 +157,7 @@ std::string UIcliente::executarLogin() {
     std::string loginInput, senhaInput;
     std::cout << "\n--- Login ---" << std::endl;
     std::cout << "Digite seu Nome (login): ";
-    std::cin.ignore(10000, '\n'); 
+    std::cin.ignore(); 
     std::getline(std::cin, loginInput);
     std::cout << "Digite sua Senha: ";
     std::getline(std::cin, senhaInput);
