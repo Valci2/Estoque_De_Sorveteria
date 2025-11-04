@@ -15,4 +15,8 @@ public:
     virtual bool logar();
     virtual int get_id();
     virtual std::string get_nome();
+
+    /* setters */
+    void set_id(int id);
+    void set_nome(const std::string &nome);
 };
