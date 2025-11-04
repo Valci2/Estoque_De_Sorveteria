@@ -1,5 +1,7 @@
 #include "interface/UIestoque.h"
 #include "interface/UIadm.h"
+#include "interface/UIcliente.h"
+#include "negocio/Estoque.h"
 #include <iostream>
 
 // adm = usuario e senha
@@ -9,6 +11,7 @@ int main() {
     std::cout << "Ola usuario" << std::endl;
     int escolha = 0;
 
+    Estoque meuEstoque;
     while (escolha != 1 && escolha != 2) {
         std::cout << "{=========================}" << std::endl;
         std::cout << "|           OLA           |" << std::endl;
@@ -28,8 +31,10 @@ int main() {
         }
 
         switch (escolha) {
-            case 1:
-                break;
+            case 1:{
+                UIcliente interface_cliente(meuEstoque);
+                interface_cliente.mostrarMenuLogin();
+            }break;
             case 2:
                 UIadm interface_adm;
                 interface_adm.iniciar(); // senha e user do adm é adm.
