@@ -16,8 +16,8 @@ int main() {
         std::cout << "{=========================}" << std::endl;
         std::cout << "|     Seja bem vindo      |" << std::endl;
         std::cout << "|                         |" << std::endl;
-        std::cout << "| Voce eh Usuario ou Adm? |" << std::endl;
-        std::cout << "| [1] usuario             |" << std::endl;
+        std::cout << "| Voce eh Cliente ou Adm? |" << std::endl;
+        std::cout << "| [1] cliente             |" << std::endl;
         std::cout << "| [2] adm                 |" << std::endl;
         std::cout << "{=========================}" << std::endl;
         std::cout << "escolha: ";
