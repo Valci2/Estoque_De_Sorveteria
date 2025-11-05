@@ -4,9 +4,6 @@
 #include "negocio/Estoque.h"
 #include <iostream>
 
-// adm = usuario e senha
-// usuario = usuario e senha
-
 int main() {
     std::cout << "Ola usuario" << std::endl;
     int escolha = 0;
